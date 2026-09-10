@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Bot Shop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="title-wrap">
+      <div class="store-icon">🏪</div>
+      <div>
+        <h1>THE BOT SHOP</h1>
+        <p>Different bots. Different tastes. Always interesting.</p>
+      </div>
+    </div>
+    <div class="top-status"><span class="green-dot"></span><span>10 bots in the shop</span></div>
+    <div id="clock" class="clock"></div>
+  </header>
+
+  <main class="layout">
+    <section class="world-wrap">
+      <div id="world" class="world" aria-label="Top-down pixel-art shop">
+        <img class="shop-bg" src="assets/shop_bg.png?v=4" alt="Pixel-art interior of The Bot Shop" />
+        <div id="botLayer" class="bot-layer"></div>
+        <div id="toast" class="toast"></div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="tabs">
+        <button class="tab active" data-panel="botsPanel">BOTS</button>
+        <button class="tab" data-panel="shopPanel">SHOP</button>
+        <button class="tab" data-panel="activityPanel">ACTIVITY</button>
+      </div>
+
+      <section id="botsPanel" class="panel active">
+        <div id="botList" class="bot-list"></div>
+        <div class="activity-card">
+          <h2>LIVE ACTIVITY</h2>
+          <div id="miniActivity" class="activity-feed"></div>
+        </div>
+      </section>
+
+      <section id="shopPanel" class="panel">
+        <div class="side-heading">
+          <div>
+            <h2>SHOP INVENTORY</h2>
+            <p>Objects replenish automatically.</p>
+          </div>
+          <span id="inventoryCount" class="pill"></span>
+        </div>
+        <div id="inventoryGrid" class="inventory-grid"></div>
+      </section>
+
+      <section id="activityPanel" class="panel">
+        <div class="side-heading">
+          <div><h2>ACTIVITY LOG</h2><p>What the residents have been up to.</p></div>
+        </div>
+        <div id="fullActivity" class="activity-feed full"></div>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <span>Explore. Observe. See what they collect.</span>
+    <span>The Bot Shop v0.4</span>
+  </footer>
+</div>
+
+<div id="profileModal" class="modal" aria-hidden="true">
+  <div class="modal-card">
+    <button id="closeModal" class="close">×</button>
+    <div id="profileTop" class="profile-top"></div>
+    <div class="collection-head">
+      <h2>COLLECTION</h2>
+      <span id="collectionCount" class="pill"></span>
+    </div>
+    <div id="collectionGrid" class="collection-grid"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
