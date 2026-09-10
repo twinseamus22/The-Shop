@@ -1,11 +1,20 @@
-# The Bot Shop
+# The Bot Shop — Native HQ Asset Build
 
-Repository-ready pixel-art prototype. Upload the contents of this folder to the root of a GitHub repository and enable GitHub Pages from `main` / root.
+This build replaces the prior enlarged preview crops with newly generated, more detailed source artwork.
 
-## Structure
-- `index.html` — page shell
-- `style.css` — pixel-art UI
-- `script.js` — simulation and collections
-- `assets/` — individually cropped PNG assets
+Upload the CONTENTS of this folder to your GitHub repository root:
+- index.html
+- style.css
+- script.js
+- assets/
 
-The hidden `peculiarity` value is used by bot decision logic but is never displayed to visitors.
+The assets folder includes:
+- detailed shop map
+- 10 bots, 4 directions, 3 frames each
+- furniture and rugs
+- decor
+- collectible objects
+- UI
+- effects and signage
+
+GitHub Pages: Settings → Pages → Deploy from a branch → main → /(root)
