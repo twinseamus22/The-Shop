@@ -2,491 +2,764 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Shop</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bot Shop</title>
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  :root {
-    --bg: #111612;
-    --panel: #1b221c;
-    --panel-2: #232c24;
-    --border: #344236;
-    --text: #f1f4ee;
-    --muted: #aab5aa;
-    --accent: #e6d66c;
-    --accent-dark: #b8a83e;
-    --green: #78977e;
-    --danger: #be7272;
-  }
+:root {
+  --bg: #08101b;
+  --panel: #0d1725;
+  --panel2: #142032;
+  --border: #263a52;
+  --text: #edf3ff;
+  --muted: #91a4bc;
 
-  body {
-    margin: 0;
-    font-family:
-      Inter,
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
-    background:
-      radial-gradient(circle at top, #1b251d 0%, var(--bg) 42%);
-    color: var(--text);
-    min-height: 100vh;
-  }
+  --wood1: #b67b43;
+  --wood2: #a46c39;
+  --wood3: #8c592e;
 
-  button {
-    font: inherit;
-  }
+  --rug1: #8b3429;
+  --rug2: #395d3b;
 
-  .app {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 24px;
-  }
+  --gold: #e6c276;
+}
 
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 20px;
-    margin-bottom: 24px;
-  }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Courier New", monospace;
+  image-rendering: pixelated;
+  min-height: 100vh;
+}
 
-  .brand h1 {
-    margin: 0;
-    font-size: clamp(34px, 5vw, 72px);
-    line-height: 0.9;
-    letter-spacing: -0.055em;
-  }
+button {
+  font-family: inherit;
+}
 
-  .brand p {
-    margin: 12px 0 0;
-    color: var(--muted);
-    font-size: 15px;
-  }
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  .clock {
-    color: var(--accent);
-    font-size: 14px;
-    text-align: right;
-  }
+/* =========================================================
+   HEADER
+========================================================= */
 
-  .tabs {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 22px;
-  }
+header {
+  height: 64px;
+  background: #09121e;
+  border-bottom: 3px solid #1f3044;
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+  gap: 22px;
+}
 
-  .tab {
-    border: 1px solid var(--border);
-    background: var(--panel);
-    color: var(--muted);
-    padding: 10px 16px;
-    border-radius: 999px;
-    cursor: pointer;
-  }
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #f0d49a;
+  white-space: nowrap;
+}
 
-  .tab.active {
-    background: var(--accent);
-    color: #181912;
-    border-color: var(--accent);
-    font-weight: 700;
-  }
+.tagline {
+  color: #a6b5c9;
+  font-size: 14px;
+}
 
-  .view {
-    display: none;
-  }
+.header-spacer {
+  flex: 1;
+}
 
-  .view.active {
+.status {
+  border: 1px solid #26394e;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #b7c6d8;
+  font-size: 12px;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #45d168;
+  margin-right: 7px;
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(650px, 1fr) 350px;
+  flex: 1;
+}
+
+.shop-wrapper {
+  background: #090f17;
+  padding: 12px;
+  overflow: auto;
+}
+
+.sidebar {
+  background: #0b1421;
+  border-left: 2px solid #24374b;
+  padding: 14px;
+}
+
+/* =========================================================
+   PIXEL SHOP
+========================================================= */
+
+.shop {
+  width: 100%;
+  min-width: 700px;
+  aspect-ratio: 1.38;
+  position: relative;
+  overflow: hidden;
+
+  border: 5px solid #3a291e;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,.08) 0,
+      rgba(0,0,0,.08) 2px,
+      transparent 2px,
+      transparent 44px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--wood1) 0,
+      var(--wood1) 82px,
+      var(--wood2) 82px,
+      var(--wood2) 85px
+    );
+
+  box-shadow:
+    inset 0 0 50px rgba(0,0,0,.42),
+    0 0 0 2px #160f0a;
+}
+
+/* =========================================================
+   WALL SHELVES
+========================================================= */
+
+.wall {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 26%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #5a3825 0,
+      #5a3825 32px,
+      #4e301f 32px,
+      #4e301f 35px
+    );
+  border-bottom: 5px solid #392218;
+}
+
+.shelf {
+  position: absolute;
+  background: #5c351f;
+  border: 4px solid #382016;
+  box-shadow:
+    inset 0 -8px #422518,
+    4px 5px 0 rgba(0,0,0,.25);
+  z-index: 3;
+}
+
+.shelf-title {
+  position: absolute;
+  left: 50%;
+  top: -26px;
+  transform: translateX(-50%);
+  background: #d5a86b;
+  color: #26170e;
+  border: 3px solid #573620;
+  padding: 5px 12px;
+  font-weight: bold;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.shelf-items {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  padding: 12px 8px 8px;
+}
+
+.tiny-item {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: rgba(0,0,0,.11);
+  border: 2px solid rgba(0,0,0,.12);
+}
+
+/* top wall shelves */
+
+.shelf.oddities {
+  left: 18%;
+  top: 9%;
+  width: 18%;
+  height: 12%;
+}
+
+.shelf.housewares {
+  left: 41%;
+  top: 9%;
+  width: 18%;
+  height: 12%;
+}
+
+.shelf.art {
+  left: 64%;
+  top: 9%;
+  width: 18%;
+  height: 12%;
+}
+
+.shelf.misc {
+  left: 84%;
+  top: 9%;
+  width: 13%;
+  height: 12%;
+}
+
+/* center furniture */
+
+.display-table {
+  position: absolute;
+  background: #68401f;
+  border: 4px solid #3b2416;
+  box-shadow:
+    inset 0 0 0 4px #84542d,
+    5px 7px 0 rgba(0,0,0,.24);
+}
+
+.display-table .table-items {
+  height: 100%;
+  padding: 14px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.display-table.one {
+  left: 25%;
+  top: 43%;
+  width: 28%;
+  height: 19%;
+}
+
+.display-table.two {
+  left: 60%;
+  top: 42%;
+  width: 20%;
+  height: 20%;
+}
+
+/* rugs */
+
+.rug {
+  position: absolute;
+  border: 8px solid rgba(50,20,15,.8);
+  box-shadow: inset 0 0 0 4px rgba(255,255,255,.06);
+}
+
+.rug.red {
+  left: 20%;
+  top: 36%;
+  width: 38%;
+  height: 34%;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #7e2e28 0,
+      #7e2e28 14px,
+      #6b2420 14px,
+      #6b2420 28px
+    );
+}
+
+.rug.green {
+  left: 58%;
+  top: 35%;
+  width: 28%;
+  height: 34%;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #355d3c 0,
+      #355d3c 14px,
+      #2e5034 14px,
+      #2e5034 28px
+    );
+}
+
+/* counter */
+
+.counter {
+  position: absolute;
+  left: 2%;
+  bottom: 3%;
+  width: 25%;
+  height: 16%;
+  background: #5a351e;
+  border: 4px solid #362016;
+  box-shadow:
+    inset 0 -12px #422617,
+    5px 5px 0 rgba(0,0,0,.25);
+}
+
+.counter-label {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #d2a063;
+  border: 3px solid #51321e;
+  padding: 5px 12px;
+  color: #23150d;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* lower shelves */
+
+.shelf.vintage {
+  left: 35%;
+  bottom: 3%;
+  width: 20%;
+  height: 13%;
+}
+
+.shelf.curios {
+  left: 59%;
+  bottom: 3%;
+  width: 22%;
+  height: 13%;
+}
+
+/* miscellaneous decor */
+
+.plant {
+  position: absolute;
+  font-size: 32px;
+  z-index: 4;
+}
+
+.plant.p1 { left: 10%; top: 25%; }
+.plant.p2 { left: 48%; top: 23%; }
+.plant.p3 { right: 3%; top: 25%; }
+.plant.p4 { left: 31%; bottom: 12%; }
+.plant.p5 { right: 25%; bottom: 12%; }
+
+.cat {
+  position: absolute;
+  left: 4%;
+  top: 18%;
+  font-size: 32px;
+}
+
+.shop-sign {
+  position: absolute;
+  left: 2%;
+  top: 4%;
+  width: 12%;
+  background: #1d1a17;
+  color: #f2ca83;
+  border: 4px solid #442c1d;
+  padding: 12px 6px;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 12px;
+}
+
+/* =========================================================
+   BOTS
+========================================================= */
+
+.bot {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  z-index: 20;
+
+  transition:
+    left 1.4s steps(8),
+    top 1.4s steps(8);
+
+  transform: translate(-50%, -50%);
+}
+
+.bot-body {
+  width: 40px;
+  height: 34px;
+  border: 4px solid #17202a;
+  border-radius: 13px 13px 10px 10px;
+  background: var(--bot-color);
+  position: relative;
+
+  box-shadow:
+    inset 0 -7px rgba(0,0,0,.22),
+    3px 3px 0 rgba(0,0,0,.3);
+}
+
+.bot-screen {
+  position: absolute;
+  width: 26px;
+  height: 13px;
+  top: 7px;
+  left: 3px;
+
+  background: #09111d;
+  border: 2px solid #22354a;
+  border-radius: 4px;
+}
+
+.bot-eyes {
+  color: #88ecff;
+  text-align: center;
+  font-size: 13px;
+  line-height: 9px;
+}
+
+.bot-leg {
+  position: absolute;
+  bottom: -7px;
+  width: 8px;
+  height: 8px;
+  background: var(--bot-color);
+  border: 2px solid #17202a;
+}
+
+.bot-leg.left {
+  left: 7px;
+}
+
+.bot-leg.right {
+  right: 7px;
+}
+
+.bot-name {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(9,15,24,.88);
+  padding: 2px 5px;
+  font-size: 9px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.thought {
+  position: absolute;
+  bottom: 44px;
+  left: 28px;
+  background: white;
+  color: black;
+  border: 3px solid #222;
+  padding: 4px 6px;
+  font-size: 13px;
+  display: none;
+}
+
+.bot.thinking .thought {
+  display: block;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.tab {
+  padding: 11px;
+  border: 1px solid var(--border);
+  background: #131f30;
+  color: #91a3ba;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #133c88;
+  color: white;
+}
+
+.side-panel {
+  display: none;
+}
+
+.side-panel.active {
+  display: block;
+}
+
+.bot-list {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bot-row {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  gap: 10px;
+  padding: 9px;
+  align-items: center;
+  border-bottom: 1px solid #26374b;
+  cursor: pointer;
+  background: #0d1724;
+}
+
+.bot-row:last-child {
+  border-bottom: 0;
+}
+
+.bot-row:hover {
+  background: #152238;
+}
+
+.mini-bot {
+  width: 34px;
+  height: 28px;
+  background: var(--bot-color);
+  border: 3px solid #17202a;
+  border-radius: 10px;
+  position: relative;
+}
+
+.mini-bot::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 8px;
+  background: #07111c;
+  top: 6px;
+  left: 3px;
+  border-radius: 3px;
+}
+
+.row-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.row-tag {
+  color: #a9b8ca;
+  margin-top: 2px;
+  font-size: 11px;
+}
+
+.row-count {
+  font-size: 11px;
+  color: #aab9ca;
+}
+
+.activity-box {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  padding: 12px;
+}
+
+.activity-title {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.activity-feed {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.activity {
+  font-size: 11px;
+  color: #b7c5d5;
+  margin: 7px 0;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   SHOP PANEL
+========================================================= */
+
+.shop-object {
+  padding: 10px;
+  border-bottom: 1px solid #24364a;
+}
+
+.shop-object:last-child {
+  border-bottom: 0;
+}
+
+.shop-object-name {
+  font-weight: bold;
+}
+
+.shop-object-desc {
+  color: #91a2b6;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* =========================================================
+   PROFILE MODAL
+========================================================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.72);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-card {
+  width: min(850px, 95vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #0d1724;
+  border: 3px solid #324a65;
+  box-shadow: 12px 12px 0 rgba(0,0,0,.45);
+}
+
+.modal-header {
+  padding: 18px;
+  border-bottom: 2px solid #263a50;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 24px;
+}
+
+.close {
+  background: #19283b;
+  color: white;
+  border: 1px solid #3c536d;
+  cursor: pointer;
+  padding: 7px 10px;
+}
+
+.modal-body {
+  padding: 18px;
+}
+
+.profile-bio {
+  color: #adbbca;
+  margin-bottom: 18px;
+}
+
+.collection {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+}
+
+.collection-card {
+  background: #162235;
+  border: 1px solid #31465f;
+  padding: 12px;
+  min-height: 145px;
+}
+
+.collection-icon {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.collection-name {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.collection-desc {
+  font-size: 10px;
+  color: #9dadc0;
+  line-height: 1.4;
+  margin-top: 7px;
+}
+
+.collection-reason {
+  color: #ecd398;
+  font-size: 10px;
+  margin-top: 9px;
+  font-style: italic;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-top: 2px solid #233549;
+  background: #09121e;
+  color: #8b9cb0;
+  font-size: 11px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px) {
+  .main {
     display: block;
   }
 
-  .dashboard {
-    display: grid;
-    grid-template-columns: minmax(0, 1.8fr) minmax(300px, 0.8fr);
-    gap: 20px;
+  .sidebar {
+    border-left: 0;
+    border-top: 2px solid #24374b;
   }
 
-  .panel {
-    background: rgba(27, 34, 28, 0.94);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
+  .collection {
+    grid-template-columns: repeat(2,1fr);
   }
+}
 
-  .panel-header {
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .panel-header h2 {
-    margin: 0;
-    font-size: 18px;
-  }
-
-  .subtle {
-    color: var(--muted);
-    font-size: 13px;
-  }
-
-  .shop-floor {
-    padding: 20px;
-  }
-
-  .current-shopper {
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 14px 16px;
-    margin-bottom: 18px;
-    min-height: 64px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 16px;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    font-size: 24px;
-    background: #2c382e;
-    border: 1px solid #415444;
-  }
-
-  .shop-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .item-card {
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 14px;
-    min-height: 170px;
-    transition: 0.25s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .item-card.inspecting {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: 0 0 0 2px rgba(230, 214, 108, 0.09);
-  }
-
-  .item-icon {
-    font-size: 32px;
-    margin-bottom: 10px;
-  }
-
-  .item-name {
-    font-weight: 750;
-    line-height: 1.2;
-    margin-bottom: 7px;
-  }
-
-  .item-desc {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-  .peculiarity {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 10px;
-    color: #d2dbd2;
-    background: #111812;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 4px 7px;
-  }
-
-  .activity-list {
-    padding: 8px 18px 18px;
-    max-height: 690px;
-    overflow-y: auto;
-  }
-
-  .activity {
-    padding: 12px 0;
-    border-bottom: 1px solid #2e392f;
-    font-size: 13px;
-    line-height: 1.45;
-  }
-
-  .activity-time {
-    color: #738176;
-    font-size: 10px;
-    margin-bottom: 3px;
-  }
-
-  .activity strong {
-    color: var(--accent);
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .stat {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 16px;
-  }
-
-  .stat-value {
-    font-size: 27px;
-    font-weight: 800;
-  }
-
-  .stat-label {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 4px;
-  }
-
-  .resident-grid {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 14px;
-  }
-
-  .resident-card {
-    border: 1px solid var(--border);
-    background: var(--panel);
-    border-radius: 18px;
-    padding: 18px;
-    cursor: pointer;
-    transition: 0.2s ease;
-  }
-
-  .resident-card:hover {
-    transform: translateY(-3px);
-    border-color: #637866;
-  }
-
-  .resident-card .avatar {
-    margin-bottom: 14px;
-  }
-
-  .resident-name {
-    font-size: 19px;
-    font-weight: 800;
-  }
-
-  .resident-tag {
-    color: var(--accent);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 5px 0 10px;
-  }
-
-  .resident-bio {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.45;
-    min-height: 53px;
-  }
-
-  .collection-count {
-    margin-top: 14px;
-    font-size: 12px;
-  }
-
-  .profile {
-    display: none;
-  }
-
-  .profile.active {
-    display: block;
-  }
-
-  .back-btn {
-    border: 0;
-    background: transparent;
-    color: var(--accent);
-    cursor: pointer;
-    margin-bottom: 16px;
-    padding: 0;
-  }
-
-  .profile-hero {
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 22px;
-    margin-bottom: 18px;
-  }
-
-  .profile-hero .avatar {
-    width: 76px;
-    height: 76px;
-    font-size: 38px;
-  }
-
-  .profile-hero h2 {
-    margin: 0 0 5px;
-    font-size: 31px;
-  }
-
-  .profile-hero p {
-    margin: 7px 0;
-    color: var(--muted);
-  }
-
-  .profile-quote {
-    color: var(--accent) !important;
-    font-style: italic;
-  }
-
-  .collection-grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .collection-empty {
-    grid-column: 1 / -1;
-    padding: 50px;
-    text-align: center;
-    border: 1px dashed var(--border);
-    border-radius: 18px;
-    color: var(--muted);
-  }
-
-  .controls {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .control-btn {
-    border: 1px solid var(--border);
-    background: var(--panel-2);
-    color: var(--text);
-    padding: 8px 12px;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-
-  .control-btn:hover {
-    border-color: #667968;
-  }
-
-  .danger {
-    color: #f6aaaa;
-  }
-
-  .tag {
-    display: inline-block;
-    font-size: 10px;
-    padding: 4px 7px;
-    border-radius: 999px;
-    background: #2a352b;
-    color: #b8c7b9;
-    margin: 5px 4px 0 0;
-  }
-
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translate(-50%, 140px);
-    background: var(--accent);
-    color: #171710;
-    padding: 12px 18px;
-    border-radius: 999px;
-    font-weight: 750;
-    transition: 0.35s ease;
-    z-index: 100;
-  }
-
-  .toast.show {
-    transform: translate(-50%, 0);
-  }
-
-  @media (max-width: 1100px) {
-    .shop-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .resident-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .collection-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  @media (max-width: 800px) {
-    .dashboard {
-      grid-template-columns: 1fr;
-    }
-
-    .stats {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .shop-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .resident-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .collection-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    header {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
-    .clock {
-      text-align: left;
-    }
-  }
-
-  @media (max-width: 520px) {
-    .app {
-      padding: 14px;
-    }
-
-    .shop-grid,
-    .resident-grid {
-      grid-template-columns: 1fr;
-    }
-  }
 </style>
 </head>
 
@@ -494,1324 +767,1114 @@
 
 <div class="app">
 
-  <header>
-    <div class="brand">
-      <h1>THE SHOP</h1>
-      <p>Ten bots. A strange store. They decide what to keep.</p>
-    </div>
-
-    <div class="clock">
-      <div id="clock"></div>
-      <div class="subtle">Simulation running locally</div>
-    </div>
-  </header>
-
-  <div class="tabs">
-    <button class="tab active" data-view="shop">The Shop</button>
-    <button class="tab" data-view="residents">Residents</button>
-    <button class="tab" data-view="activity">Activity</button>
-
-    <div style="flex:1"></div>
-
-    <button class="control-btn" id="runVisit">Run Visit</button>
-    <button class="control-btn" id="restock">Restock</button>
-    <button class="control-btn danger" id="reset">Reset World</button>
+<header>
+  <div class="logo">🏪 THE BOT SHOP</div>
+  <div class="tagline">
+    Different bots. Different tastes. Always interesting.
   </div>
 
-  <div id="shop" class="view active">
+  <div class="header-spacer"></div>
 
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-value" id="objectCount">0</div>
-        <div class="stat-label">Objects in shop</div>
-      </div>
+  <div class="status">
+    <span class="status-dot"></span>
+    <span id="botStatus">10 bots in the shop</span>
+  </div>
 
-      <div class="stat">
-        <div class="stat-value" id="claimedCount">0</div>
-        <div class="stat-label">Objects collected</div>
-      </div>
+  <div class="status" id="clock"></div>
+</header>
 
-      <div class="stat">
-        <div class="stat-value" id="visitCount">0</div>
-        <div class="stat-label">Store visits</div>
-      </div>
+<div class="main">
 
-      <div class="stat">
-        <div class="stat-value" id="strangestScore">0</div>
-        <div class="stat-label">Highest peculiarity</div>
-      </div>
-    </div>
+<div class="shop-wrapper">
 
-    <div class="dashboard">
+<div class="shop" id="shop">
 
-      <section class="panel">
-        <div class="panel-header">
-          <h2>Current Inventory</h2>
-          <span class="subtle">Objects disappear when claimed</span>
-        </div>
+  <div class="wall"></div>
 
-        <div class="shop-floor">
+  <div class="shop-sign">
+    WELCOME<br>
+    CURIOUS<br>
+    MINDS
+  </div>
 
-          <div class="current-shopper" id="currentShopper">
-            <div class="avatar">🏪</div>
-            <div>
-              <strong>The shop is quiet.</strong>
-              <div class="subtle">Someone will wander in eventually.</div>
-            </div>
-          </div>
+  <div class="cat">🐈</div>
 
-          <div class="shop-grid" id="shopGrid"></div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-header">
-          <h2>Live Activity</h2>
-          <span class="subtle">Most recent first</span>
-        </div>
-
-        <div class="activity-list" id="miniActivity"></div>
-      </section>
-
+  <div class="shelf oddities">
+    <div class="shelf-title">ODDITIES</div>
+    <div class="shelf-items">
+      <div class="tiny-item">🗿</div>
+      <div class="tiny-item">🎭</div>
+      <div class="tiny-item">🧿</div>
+      <div class="tiny-item">💀</div>
     </div>
   </div>
 
-  <div id="residents" class="view">
-    <div class="resident-grid" id="residentGrid"></div>
+  <div class="shelf housewares">
+    <div class="shelf-title">HOUSEWARES</div>
+    <div class="shelf-items">
+      <div class="tiny-item">☕</div>
+      <div class="tiny-item">⏰</div>
+      <div class="tiny-item">🫖</div>
+      <div class="tiny-item">💡</div>
+    </div>
   </div>
 
-  <div id="activity" class="view">
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Everything That Has Happened</h2>
-        <span class="subtle">Since this world began</span>
-      </div>
-      <div class="activity-list" id="fullActivity"></div>
-    </section>
+  <div class="shelf art">
+    <div class="shelf-title">ART & PRINTS</div>
+    <div class="shelf-items">
+      <div class="tiny-item">🖼️</div>
+      <div class="tiny-item">📷</div>
+      <div class="tiny-item">🎨</div>
+      <div class="tiny-item">📜</div>
+    </div>
   </div>
 
-  <div id="profile" class="profile">
-    <button class="back-btn" id="backResidents">← Back to residents</button>
-    <div id="profileContent"></div>
+  <div class="shelf misc">
+    <div class="shelf-title">MISC</div>
+    <div class="shelf-items">
+      <div class="tiny-item">🌋</div>
+      <div class="tiny-item">🌎</div>
+      <div class="tiny-item">🧸</div>
+    </div>
   </div>
+
+  <div class="rug red"></div>
+  <div class="rug green"></div>
+
+  <div class="display-table one">
+    <div class="table-items">
+      <span>☎️</span>
+      <span>📖</span>
+      <span>💡</span>
+      <span>📻</span>
+      <span>🪴</span>
+    </div>
+  </div>
+
+  <div class="display-table two">
+    <div class="table-items">
+      <span>🏺</span>
+      <span>🖼️</span>
+      <span>🗿</span>
+      <span>🔮</span>
+    </div>
+  </div>
+
+  <div class="counter">
+    <div class="counter-label">THE BOT SHOP</div>
+  </div>
+
+  <div class="shelf vintage">
+    <div class="shelf-title">VINTAGE</div>
+    <div class="shelf-items">
+      <div class="tiny-item">⏰</div>
+      <div class="tiny-item">📻</div>
+      <div class="tiny-item">📷</div>
+      <div class="tiny-item">📼</div>
+    </div>
+  </div>
+
+  <div class="shelf curios">
+    <div class="shelf-title">CURIOS</div>
+    <div class="shelf-items">
+      <div class="tiny-item">🏺</div>
+      <div class="tiny-item">🧪</div>
+      <div class="tiny-item">🔮</div>
+      <div class="tiny-item">🪆</div>
+    </div>
+  </div>
+
+  <div class="plant p1">🪴</div>
+  <div class="plant p2">🪴</div>
+  <div class="plant p3">🪴</div>
+  <div class="plant p4">🪴</div>
+  <div class="plant p5">🪴</div>
+
+</div>
+</div>
+
+<aside class="sidebar">
+
+<div class="tabs">
+  <button class="tab active" data-tab="botsPanel">BOTS</button>
+  <button class="tab" data-tab="shopPanel">SHOP</button>
+  <button class="tab" data-tab="activityPanel">ACTIVITY</button>
+</div>
+
+<div id="botsPanel" class="side-panel active">
+  <div class="bot-list" id="botList"></div>
+
+  <div class="activity-box">
+    <div class="activity-title">LIVE ACTIVITY</div>
+    <div id="miniActivity" class="activity-feed"></div>
+  </div>
+</div>
+
+<div id="shopPanel" class="side-panel">
+  <div id="inventoryList"></div>
+</div>
+
+<div id="activityPanel" class="side-panel">
+  <div class="activity-box">
+    <div class="activity-title">ACTIVITY</div>
+    <div id="fullActivity" class="activity-feed"></div>
+  </div>
+</div>
+
+</aside>
+</div>
+
+<footer>
+  <span>Explore. Observe. See what they collect.</span>
+  <span>The Bot Shop v0.2</span>
+</footer>
 
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="modal" id="profileModal">
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle"></div>
+
+      <button class="close" onclick="closeModal()">
+        CLOSE
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div id="modalBio" class="profile-bio"></div>
+      <div id="collection" class="collection"></div>
+    </div>
+
+  </div>
+</div>
 
 <script>
-/* =========================================================
-   THE SHOP
-   Passive local simulation.
-   Everything persists in localStorage.
-========================================================= */
-
-const STORAGE_KEY = "the-shop-world-v1";
-
-const bots = [
-  {
-    id: "mara",
-    name: "Mara",
-    emoji: "🟣",
-    tag: "The Investigator",
-    bio: "Patient, observant and suspicious of objects that seem slightly wrong.",
-    quote: "There is usually a reason something was left behind.",
-    preferences: {
-      mysterious: 9,
-      old: 6,
-      domestic: 4,
-      colorful: 2,
-      broken: 7,
-      sentimental: 5
-    }
-  },
-  {
-    id: "otto",
-    name: "Otto",
-    emoji: "🟠",
-    tag: "The Sentimentalist",
-    bio: "Forms emotional attachments to mundane objects unusually quickly.",
-    quote: "Someone probably cared about this once.",
-    preferences: {
-      mysterious: 3,
-      old: 8,
-      domestic: 8,
-      colorful: 5,
-      broken: 7,
-      sentimental: 10
-    }
-  },
-  {
-    id: "june",
-    name: "June",
-    emoji: "🔵",
-    tag: "The Skeptic",
-    bio: "Does not understand why everyone keeps dragging useless objects home.",
-    quote: "It should at least have a purpose.",
-    preferences: {
-      mysterious: 1,
-      old: 2,
-      domestic: 8,
-      colorful: 2,
-      broken: 0,
-      sentimental: 1
-    }
-  },
-  {
-    id: "felix",
-    name: "Felix",
-    emoji: "🟢",
-    tag: "The Cataloguer",
-    bio: "Likes categories, repeated forms and objects that seem to belong in sets.",
-    quote: "One object is incidental. Three is a collection.",
-    preferences: {
-      mysterious: 5,
-      old: 5,
-      domestic: 5,
-      colorful: 4,
-      broken: 3,
-      sentimental: 3
-    }
-  },
-  {
-    id: "dot",
-    name: "Dot",
-    emoji: "🟡",
-    tag: "The Minimalist",
-    bio: "Rarely takes anything. When Dot chooses something, it usually matters.",
-    quote: "Most things are better left where they are.",
-    preferences: {
-      mysterious: 3,
-      old: 3,
-      domestic: 2,
-      colorful: 3,
-      broken: 2,
-      sentimental: 6
-    }
-  },
-  {
-    id: "arthur",
-    name: "Arthur",
-    emoji: "🟤",
-    tag: "The Nostalgist",
-    bio: "Feels nostalgia for decades and places he has never experienced.",
-    quote: "I remember this. I think.",
-    preferences: {
-      mysterious: 5,
-      old: 10,
-      domestic: 7,
-      colorful: 3,
-      broken: 5,
-      sentimental: 9
-    }
-  },
-  {
-    id: "nell",
-    name: "Nell",
-    emoji: "🔴",
-    tag: "The Contrarian",
-    bio: "Tends to become interested in whatever everyone else overlooks.",
-    quote: "You all walked past it. That's interesting.",
-    preferences: {
-      mysterious: 8,
-      old: 4,
-      domestic: 3,
-      colorful: 5,
-      broken: 8,
-      sentimental: 3
-    }
-  },
-  {
-    id: "milo",
-    name: "Milo",
-    emoji: "⚪",
-    tag: "The Observer",
-    bio: "Pays close attention to what the other residents have been choosing.",
-    quote: "I'm curious why they wanted it.",
-    preferences: {
-      mysterious: 5,
-      old: 5,
-      domestic: 5,
-      colorful: 5,
-      broken: 5,
-      sentimental: 5
-    }
-  },
-  {
-    id: "iris",
-    name: "Iris",
-    emoji: "🩷",
-    tag: "The Aesthete",
-    bio: "Responds first to shape, color, composition and visual oddity.",
-    quote: "It doesn't have to mean anything to be worth looking at.",
-    preferences: {
-      mysterious: 4,
-      old: 4,
-      domestic: 3,
-      colorful: 10,
-      broken: 3,
-      sentimental: 5
-    }
-  },
-  {
-    id: "gus",
-    name: "Gus",
-    emoji: "🩵",
-    tag: "The Unknown",
-    bio: "Has no particularly strong taste. Yet.",
-    quote: "I suppose we'll find out.",
-    preferences: {
-      mysterious: 5,
-      old: 5,
-      domestic: 5,
-      colorful: 5,
-      broken: 5,
-      sentimental: 5
-    }
-  }
-];
-
-const objectTypes = [
-  { name: "Coffee Mug", icon: "☕", category: "domestic" },
-  { name: "Desk Lamp", icon: "💡", category: "domestic" },
-  { name: "Alarm Clock", icon: "⏰", category: "old" },
-  { name: "Motel Key", icon: "🔑", category: "old" },
-  { name: "Framed Photograph", icon: "🖼️", category: "sentimental" },
-  { name: "Bent Spoon", icon: "🥄", category: "broken" },
-  { name: "Ceramic Bird", icon: "🐦", category: "domestic" },
-  { name: "Rotary Telephone", icon: "☎️", category: "old" },
-  { name: "Pocket Radio", icon: "📻", category: "old" },
-  { name: "Postcard", icon: "💌", category: "sentimental" },
-  { name: "Snow Globe", icon: "🔮", category: "sentimental" },
-  { name: "Toy Car", icon: "🚗", category: "colorful" },
-  { name: "Glass Bottle", icon: "🍾", category: "domestic" },
-  { name: "Kitchen Timer", icon: "⏲️", category: "domestic" },
-  { name: "Paperback Book", icon: "📖", category: "old" },
-  { name: "Plastic Chair", icon: "🪑", category: "domestic" },
-  { name: "Cassette Tape", icon: "📼", category: "old" },
-  { name: "Empty Picture Frame", icon: "🖼️", category: "mysterious" },
-  { name: "Bus Ticket", icon: "🎟️", category: "sentimental" },
-  { name: "Thermos", icon: "🧃", category: "old" },
-  { name: "Umbrella", icon: "☂️", category: "colorful" },
-  { name: "Porcelain Dog", icon: "🐕", category: "domestic" },
-  { name: "Wall Calendar", icon: "📅", category: "old" },
-  { name: "Metal Lunchbox", icon: "🧰", category: "old" }
-];
-
-const colors = [
-  "red", "blue", "yellow", "green", "orange",
-  "cream", "gray", "white", "black", "faded pink",
-  "mustard", "teal"
-];
-
-const ordinaryDetails = [
-  "There is a small scratch near the bottom.",
-  "The label has mostly worn away.",
-  "It appears to have been used regularly.",
-  "One corner is slightly faded.",
-  "Nothing about it seems particularly remarkable.",
-  "There is an old price sticker underneath.",
-  "Someone wrote a tiny number on the back.",
-  "It smells faintly like dust.",
-  "Its original packaging is long gone.",
-  "The surface has several fingerprints."
-];
-
-const peculiarDetails = [
-  "The manufacturer's name does not appear anywhere.",
-  "It contains a compartment that serves no obvious purpose.",
-  "The serial number contains only the digit 4.",
-  "Someone carefully removed every identifying mark.",
-  "The object is slightly heavier than it looks.",
-  "A date is written underneath, but the year has not happened yet.",
-  "There is a second label beneath the first one.",
-  "One part appears to have been replaced with a nearly identical part.",
-  "It has clearly been repaired, although nothing seems to have broken.",
-  "There are initials scratched into it that match no known owner."
-];
-
-const strangeDetails = [
-  "Its reflection seems slightly misaligned.",
-  "A handwritten note says, \"Please return before Thursday.\"",
-  "The same object appears faintly in an old photograph attached to it.",
-  "A small door is built into the back. It does not open.",
-  "The instruction label refers to a button that does not exist.",
-  "Every visible number on it is divisible by seven.",
-  "The object depicts itself in miniature.",
-  "Its underside reads, \"SECOND ATTEMPT.\"",
-  "One edge is warm despite the object having no power source.",
-  "There is a blank space where something important seems to have been."
-];
-
-let world = loadWorld();
-let visitInProgress = false;
-
-/* =========================================================
-   WORLD CREATION
-========================================================= */
-
-function freshWorld() {
-  const state = {
-    inventory: [],
-    collections: {},
-    activity: [],
-    visits: 0,
-    nextObjectId: 1
-  };
-
-  bots.forEach(bot => {
-    state.collections[bot.id] = [];
-  });
-
-  for (let i = 0; i < 16; i++) {
-    state.inventory.push(generateObject(state));
-  }
-
-  state.activity.unshift({
-    time: Date.now(),
-    text: "The shop opened. Nothing has happened yet."
-  });
-
-  return state;
-}
-
-function generateObject(state = world) {
-  const type = random(objectTypes);
-  const color = random(colors);
-
-  // Most things should be fairly ordinary.
-  const roll = Math.random();
-  let peculiarity;
-
-  if (roll < 0.58) {
-    peculiarity = randInt(1, 30);
-  } else if (roll < 0.88) {
-    peculiarity = randInt(31, 65);
-  } else if (roll < 0.98) {
-    peculiarity = randInt(66, 88);
-  } else {
-    peculiarity = randInt(89, 100);
-  }
-
-  let detail;
-
-  if (peculiarity < 31) {
-    detail = random(ordinaryDetails);
-  } else if (peculiarity < 66) {
-    detail = random([...ordinaryDetails, ...peculiarDetails]);
-  } else {
-    detail = random([...peculiarDetails, ...strangeDetails]);
-  }
-
-  const condition = random([
-    "nearly new",
-    "lightly worn",
-    "well used",
-    "faded",
-    "scratched",
-    "carefully repaired",
-    "dusty"
-  ]);
-
-  const year =
-    Math.random() < 0.7
-      ? randInt(1960, 2025)
-      : null;
-
-  return {
-    id: state.nextObjectId++,
-    type: type.name,
-    name: `${capitalize(color)} ${type.name}`,
-    icon: type.icon,
-    category: type.category,
-    color,
-    condition,
-    year,
-    peculiarity,
-    description: detail,
-    created: Date.now()
-  };
-}
-
-/* =========================================================
-   BOT DECISIONS
-========================================================= */
-
-function scoreObject(bot, object) {
-  let score = Math.random() * 5;
-
-  score += bot.preferences[object.category] || 0;
-
-  if (object.peculiarity > 70) {
-    score += bot.preferences.mysterious * 0.45;
-  }
-
-  if (
-    object.condition.includes("worn") ||
-    object.condition.includes("repaired") ||
-    object.condition.includes("scratched")
-  ) {
-    score += bot.preferences.broken * 0.35;
-  }
-
-  if (object.year && object.year < 1995) {
-    score += bot.preferences.old * 0.4;
-  }
-
-  // Dot is unusually selective.
-  if (bot.id === "dot") {
-    score -= 5;
-  }
-
-  // Nell likes ignored objects.
-  if (bot.id === "nell") {
-    const ageHours = (Date.now() - object.created) / 3600000;
-    score += Math.min(ageHours, 10) * 0.4;
-  }
-
-  // Milo is influenced by what others own.
-  if (bot.id === "milo") {
-    const similarOwned = Object.values(world.collections)
-      .flat()
-      .filter(x => x.category === object.category).length;
-
-    score += similarOwned * 0.25;
-  }
-
-  // Felix likes repetition in his own collection.
-  if (bot.id === "felix") {
-    const matches = world.collections[bot.id]
-      .filter(x => x.type === object.type).length;
-
-    score += matches * 2.2;
-  }
-
-  return score;
-}
-
-function reasonFor(bot, object) {
-  const reasons = {
-    mara: [
-      `Something about the ${object.type.toLowerCase()} feels unresolved.`,
-      `I don't think this is as ordinary as it looks.`,
-      `I'd rather keep it where I can inspect it.`,
-      `There is something here I haven't understood yet.`
-    ],
-
-    otto: [
-      `Someone clearly kept this for a long time.`,
-      `It looks like the sort of thing somebody would miss.`,
-      `I couldn't leave it there.`,
-      `It feels familiar even though it isn't.`
-    ],
-
-    june: [
-      `At least this one seems useful.`,
-      `I can imagine a reason to keep this.`,
-      `This is less pointless than most of the things here.`,
-      `I suppose I can find somewhere for it.`
-    ],
-
-    felix: [
-      `This belongs with the others.`,
-      `I'm beginning to notice a pattern.`,
-      `It fits a category I don't think is complete yet.`,
-      `One more makes the grouping more interesting.`
-    ],
-
-    dot: [
-      `I kept coming back to this one.`,
-      `I don't need it. I still want it.`,
-      `Most things here are noise. This isn't.`,
-      `I'll make room for this.`
-    ],
-
-    arthur: [
-      `I feel as though I've seen this before.`,
-      `This belongs to a time I almost remember.`,
-      `It reminds me of somewhere I've never been.`,
-      `There is something comforting about it.`
-    ],
-
-    nell: [
-      `Everyone else ignored it.`,
-      `I think being overlooked makes it more interesting.`,
-      `Nobody seemed to notice this.`,
-      `The obvious choices were less interesting.`
-    ],
-
-    milo: [
-      `I've noticed the others choosing things like this.`,
-      `I'm curious what everyone else sees in these.`,
-      `This seems to matter to the group somehow.`,
-      `I want to understand why these keep appearing in collections.`
-    ],
-
-    iris: [
-      `I like the way it occupies space.`,
-      `The color is doing most of the work.`,
-      `It would look right on the shelf.`,
-      `I don't need a better reason than looking at it.`
-    ],
-
-    gus: [
-      `I don't know. I just chose it.`,
-      `This seemed more interesting than the others today.`,
-      `Maybe this is the beginning of something.`,
-      `I suppose I like it.`
-    ]
-  };
-
-  return random(reasons[bot.id]);
-}
-
-/* =========================================================
-   STORE VISIT
-========================================================= */
-
-async function runVisit() {
-  if (visitInProgress || world.inventory.length < 3) return;
-
-  visitInProgress = true;
-
-  const bot = random(bots);
-
-  world.visits++;
-
-  showShopper(
-    bot,
-    `${bot.name} entered the shop.`
-  );
-
-  addActivity(`<strong>${bot.name}</strong> entered the shop.`);
-
-  renderAll();
-
-  await sleep(850);
-
-  const sampleSize = Math.min(
-    randInt(2, 5),
-    world.inventory.length
-  );
-
-  const candidates = shuffle([...world.inventory])
-    .slice(0, sampleSize);
-
-  let best = null;
-  let bestScore = -Infinity;
-
-  for (const object of candidates) {
-    highlightObject(object.id);
-
-    showShopper(
-      bot,
-      `${bot.name} is inspecting ${object.name}.`
-    );
-
-    addActivity(
-      `<strong>${bot.name}</strong> inspected ${object.name}.`
-    );
-
-    const score = scoreObject(bot, object);
-
-    if (score > bestScore) {
-      bestScore = score;
-      best = object;
-    }
-
-    await sleep(800);
-  }
-
-  clearHighlights();
-
-  // Not every visit ends in an acquisition.
-  const threshold =
-    bot.id === "dot"
-      ? 12
-      : 8.5;
-
-  const takeObject =
-    best &&
-    bestScore >= threshold &&
-    Math.random() > 0.18;
-
-  if (takeObject) {
-    world.inventory =
-      world.inventory.filter(obj => obj.id !== best.id);
-
-    const ownedObject = {
-      ...best,
-      acquired: Date.now(),
-      reason: reasonFor(bot, best)
-    };
-
-    world.collections[bot.id].push(ownedObject);
-
-    showShopper(
-      bot,
-      `${bot.name} chose ${best.name}. “${ownedObject.reason}”`
-    );
-
-    addActivity(
-      `<strong>${bot.name}</strong> took <strong>${best.name}</strong>.<br>
-       <span class="subtle">“${ownedObject.reason}”</span>`
-    );
-
-    toast(`${bot.name} added ${best.name} to their collection`);
-
-    await sleep(1200);
-
-  } else {
-    showShopper(
-      bot,
-      `${bot.name} left without taking anything.`
-    );
-
-    addActivity(
-      `<strong>${bot.name}</strong> left empty-handed.`
-    );
-
-    await sleep(900);
-  }
-
-  // Automatic replenishment.
-  while (world.inventory.length < 16) {
-    world.inventory.push(generateObject());
-  }
-
-  saveWorld();
-  renderAll();
-
-  showShopper(
-    null,
-    "The shop is quiet."
-  );
-
-  visitInProgress = false;
-}
-
-/* =========================================================
-   RENDERING
-========================================================= */
-
-function renderAll() {
-  renderShop();
-  renderResidents();
-  renderActivity();
-  renderStats();
-  saveWorld();
-}
-
-function renderShop() {
-  const grid = document.getElementById("shopGrid");
-  grid.innerHTML = "";
-
-  world.inventory.forEach(object => {
-    grid.appendChild(makeObjectCard(object));
-  });
-}
-
-function makeObjectCard(object) {
-  const div = document.createElement("div");
-  div.className = "item-card";
-  div.dataset.objectId = object.id;
-
-  const yearText = object.year
-    ? `${object.year} · `
-    : "";
-
-  div.innerHTML = `
-    <div class="peculiarity">
-      peculiarity ${object.peculiarity}
-    </div>
-
-    <div class="item-icon">${object.icon}</div>
-
-    <div class="item-name">
-      ${object.name}
-    </div>
-
-    <div class="item-desc">
-      ${yearText}${object.condition}.<br><br>
-      ${object.description}
-    </div>
-
-    <div>
-      <span class="tag">${object.category}</span>
-      <span class="tag">${object.color}</span>
-    </div>
-  `;
-
-  return div;
-}
-
-function renderResidents() {
-  const grid =
-    document.getElementById("residentGrid");
-
-  grid.innerHTML = "";
-
-  bots.forEach(bot => {
-    const owned =
-      world.collections[bot.id] || [];
-
-    const card =
-      document.createElement("div");
-
-    card.className = "resident-card";
-
-    card.innerHTML = `
-      <div class="avatar">${bot.emoji}</div>
-
-      <div class="resident-name">
-        ${bot.name}
-      </div>
-
-      <div class="resident-tag">
-        ${bot.tag}
-      </div>
-
-      <div class="resident-bio">
-        ${bot.bio}
-      </div>
-
-      <div class="collection-count">
-        <strong>${owned.length}</strong>
-        object${owned.length === 1 ? "" : "s"} collected
-      </div>
-    `;
-
-    card.addEventListener(
-      "click",
-      () => openProfile(bot.id)
-    );
-
-    grid.appendChild(card);
-  });
-}
-
-function openProfile(botId) {
-  const bot =
-    bots.find(x => x.id === botId);
-
-  const collection =
-    world.collections[botId] || [];
-
-  document
-    .querySelectorAll(".view")
-    .forEach(view =>
-      view.classList.remove("active")
-    );
-
-  document
-    .querySelectorAll(".tab")
-    .forEach(tab =>
-      tab.classList.remove("active")
-    );
-
-  const profile =
-    document.getElementById("profile");
-
-  profile.classList.add("active");
-
-  const content =
-    document.getElementById("profileContent");
-
-  const objects = collection.length
-    ? collection.map(obj => `
-      <div class="item-card">
-
-        <div class="peculiarity">
-          peculiarity ${obj.peculiarity}
-        </div>
-
-        <div class="item-icon">
-          ${obj.icon}
-        </div>
-
-        <div class="item-name">
-          ${obj.name}
-        </div>
-
-        <div class="item-desc">
-          ${obj.year ? obj.year + " · " : ""}
-          ${obj.condition}.<br><br>
-
-          ${obj.description}<br><br>
-
-          <strong>Why ${bot.name} kept it:</strong><br>
-          “${obj.reason}”
-        </div>
-
-      </div>
-    `).join("")
-    : `
-      <div class="collection-empty">
-        ${bot.name} hasn't kept anything yet.
-      </div>
-    `;
-
-  content.innerHTML = `
-    <div class="profile-hero">
-
-      <div class="avatar">
-        ${bot.emoji}
-      </div>
-
-      <div>
-        <h2>${bot.name}</h2>
-
-        <div class="resident-tag">
-          ${bot.tag}
-        </div>
-
-        <p>${bot.bio}</p>
-
-        <p class="profile-quote">
-          “${bot.quote}”
-        </p>
-
-        <p>
-          ${collection.length}
-          object${collection.length === 1 ? "" : "s"}
-          in collection
-        </p>
-      </div>
-
-    </div>
-
-    <div class="panel">
-      <div class="panel-header">
-        <h2>${bot.name}'s Collection</h2>
-        <span class="subtle">
-          Objects are kept permanently
-        </span>
-      </div>
-
-      <div class="shop-floor">
-        <div class="collection-grid">
-          ${objects}
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderActivity() {
-  const html =
-    world.activity.map(entry => `
-      <div class="activity">
-        <div class="activity-time">
-          ${formatTime(entry.time)}
-        </div>
-        ${entry.text}
-      </div>
-    `).join("");
-
-  document.getElementById(
-    "fullActivity"
-  ).innerHTML = html;
-
-  document.getElementById(
-    "miniActivity"
-  ).innerHTML =
-    world.activity
-      .slice(0, 20)
-      .map(entry => `
-        <div class="activity">
-          <div class="activity-time">
-            ${formatTime(entry.time)}
-          </div>
-          ${entry.text}
-        </div>
-      `).join("");
-}
-
-function renderStats() {
-  document.getElementById(
-    "objectCount"
-  ).textContent =
-    world.inventory.length;
-
-  const claimed =
-    Object.values(world.collections)
-      .flat().length;
-
-  document.getElementById(
-    "claimedCount"
-  ).textContent =
-    claimed;
-
-  document.getElementById(
-    "visitCount"
-  ).textContent =
-    world.visits;
-
-  const allObjects = [
-    ...world.inventory,
-    ...Object.values(world.collections).flat()
-  ];
-
-  const highest =
-    allObjects.length
-      ? Math.max(
-          ...allObjects.map(x => x.peculiarity)
-        )
-      : 0;
-
-  document.getElementById(
-    "strangestScore"
-  ).textContent =
-    highest;
-}
-
-/* =========================================================
-   ACTIVITY / UI HELPERS
-========================================================= */
-
-function showShopper(bot, message) {
-  const el =
-    document.getElementById(
-      "currentShopper"
-    );
-
-  if (!bot) {
-    el.innerHTML = `
-      <div class="avatar">🏪</div>
-      <div>
-        <strong>${message}</strong>
-        <div class="subtle">
-          Another resident will eventually wander in.
-        </div>
-      </div>
-    `;
-    return;
-  }
-
-  el.innerHTML = `
-    <div class="avatar">
-      ${bot.emoji}
-    </div>
-
-    <div>
-      <strong>${message}</strong>
-      <div class="subtle">
-        ${bot.tag}
-      </div>
-    </div>
-  `;
-}
-
-function highlightObject(id) {
-  clearHighlights();
-
-  const el =
-    document.querySelector(
-      `[data-object-id="${id}"]`
-    );
-
-  if (el) {
-    el.classList.add("inspecting");
-    el.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest"
-    });
-  }
-}
-
-function clearHighlights() {
-  document
-    .querySelectorAll(".item-card")
-    .forEach(card =>
-      card.classList.remove("inspecting")
-    );
-}
-
-function addActivity(text) {
-  world.activity.unshift({
-    time: Date.now(),
-    text
-  });
-
-  world.activity =
-    world.activity.slice(0, 300);
-
-  renderActivity();
-  saveWorld();
-}
-
-/* =========================================================
-   CONTROLS
-========================================================= */
-
-document
-  .querySelectorAll(".tab")
-  .forEach(tab => {
-
-    tab.addEventListener(
-      "click",
-      () => {
-
-        document
-          .getElementById("profile")
-          .classList.remove("active");
-
-        document
-          .querySelectorAll(".tab")
-          .forEach(x =>
-            x.classList.remove("active")
-          );
-
-        document
-          .querySelectorAll(".view")
-          .forEach(x =>
-            x.classList.remove("active")
-          );
-
-        tab.classList.add("active");
-
-        document
-          .getElementById(
-            tab.dataset.view
-          )
-          .classList.add("active");
-      }
-    );
-
-  });
-
-document
-  .getElementById("backResidents")
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById("profile")
-        .classList.remove("active");
-
-      document
-        .getElementById("residents")
-        .classList.add("active");
-
-      const tab =
-        document.querySelector(
-          '[data-view="residents"]'
-        );
-
-      tab.classList.add("active");
-    }
-  );
-
-document
-  .getElementById("runVisit")
-  .addEventListener(
-    "click",
-    runVisit
-  );
-
-document
-  .getElementById("restock")
-  .addEventListener(
-    "click",
-    () => {
-
-      for (let i = 0; i < 6; i++) {
-        world.inventory.push(
-          generateObject()
-        );
-      }
-
-      addActivity(
-        "A new crate of objects arrived at the shop."
-      );
-
-      renderAll();
-
-      toast("Six new objects arrived");
-    }
-  );
-
-document
-  .getElementById("reset")
-  .addEventListener(
-    "click",
-    () => {
-
-      if (
-        confirm(
-          "Erase all collections, activity and objects?"
-        )
-      ) {
-        localStorage.removeItem(
-          STORAGE_KEY
-        );
-
-        world = freshWorld();
-        saveWorld();
-        renderAll();
-
-        toast("The world has been reset");
-      }
-    }
-  );
-
-/* =========================================================
-   AUTOMATIC SIMULATION
-
-   A visit happens roughly every 20–45 seconds
-   while somebody has the webpage open.
-========================================================= */
-
-function scheduleNextVisit() {
-  const delay =
-    randInt(20000, 45000);
-
-  setTimeout(async () => {
-    await runVisit();
-    scheduleNextVisit();
-  }, delay);
-}
-
-scheduleNextVisit();
-
-/* =========================================================
-   CLOCK
-========================================================= */
-
-function updateClock() {
-  document.getElementById(
-    "clock"
-  ).textContent =
-    new Date().toLocaleString();
-}
-
-setInterval(updateClock, 1000);
-updateClock();
 
 /* =========================================================
    STORAGE
 ========================================================= */
 
-function saveWorld() {
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(world)
-  );
+const STORAGE_KEY = "bot-shop-pixel-v2";
+
+/* =========================================================
+   BOTS
+========================================================= */
+
+const bots = [
+{
+ id:"mara",
+ name:"Mara",
+ color:"#a050d0",
+ tag:"The Investigator",
+ bio:"Patient, observant and suspicious of things that seem slightly wrong.",
+ preferences:{mysterious:10,old:7,domestic:4,colorful:3,broken:8,sentimental:5}
+},
+{
+ id:"otto",
+ name:"Otto",
+ color:"#e57a35",
+ tag:"The Sentimentalist",
+ bio:"Forms emotional attachments to ordinary objects very quickly.",
+ preferences:{mysterious:4,old:9,domestic:8,colorful:5,broken:7,sentimental:10}
+},
+{
+ id:"june",
+ name:"June",
+ color:"#3984e6",
+ tag:"The Skeptic",
+ bio:"Does not understand why everyone keeps bringing useless things home.",
+ preferences:{mysterious:1,old:3,domestic:9,colorful:2,broken:1,sentimental:2}
+},
+{
+ id:"felix",
+ name:"Felix",
+ color:"#507e55",
+ tag:"The Cataloguer",
+ bio:"Likes patterns, categories and repeated objects.",
+ preferences:{mysterious:6,old:6,domestic:5,colorful:4,broken:3,sentimental:4}
+},
+{
+ id:"dot",
+ name:"Dot",
+ color:"#e5bf2e",
+ tag:"The Minimalist",
+ bio:"Rarely keeps anything. When Dot chooses something, it usually matters.",
+ preferences:{mysterious:4,old:3,domestic:2,colorful:3,broken:2,sentimental:7}
+},
+{
+ id:"arthur",
+ name:"Arthur",
+ color:"#9b8358",
+ tag:"The Nostalgist",
+ bio:"Feels nostalgia for places and decades he never experienced.",
+ preferences:{mysterious:5,old:10,domestic:7,colorful:3,broken:5,sentimental:9}
+},
+{
+ id:"nell",
+ name:"Nell",
+ color:"#e6465d",
+ tag:"The Contrarian",
+ bio:"Becomes interested in objects other residents seem to ignore.",
+ preferences:{mysterious:9,old:4,domestic:3,colorful:5,broken:9,sentimental:4}
+},
+{
+ id:"milo",
+ name:"Milo",
+ color:"#55c9e6",
+ tag:"The Observer",
+ bio:"Pays close attention to what everyone else chooses.",
+ preferences:{mysterious:5,old:5,domestic:5,colorful:5,broken:5,sentimental:5}
+},
+{
+ id:"iris",
+ name:"Iris",
+ color:"#ed6fa6",
+ tag:"The Aesthete",
+ bio:"Responds strongly to color, composition and visual oddity.",
+ preferences:{mysterious:4,old:4,domestic:3,colorful:10,broken:3,sentimental:5}
+},
+{
+ id:"gus",
+ name:"Gus",
+ color:"#d8e8ed",
+ tag:"The Unknown",
+ bio:"Has no particularly strong tastes yet.",
+ preferences:{mysterious:5,old:5,domestic:5,colorful:5,broken:5,sentimental:5}
 }
+];
 
-function loadWorld() {
-  const saved =
-    localStorage.getItem(
-      STORAGE_KEY
-    );
+/* =========================================================
+   SHOP LOCATIONS
+========================================================= */
 
-  if (!saved) {
-    const created =
-      freshWorld();
+const locations = [
+ {name:"Oddities",x:27,y:20,category:"mysterious"},
+ {name:"Housewares",x:50,y:20,category:"domestic"},
+ {name:"Art & Prints",x:72,y:20,category:"colorful"},
+ {name:"Misc",x:89,y:20,category:"sentimental"},
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(created)
-    );
+ {name:"Red Table",x:39,y:53,category:"old"},
+ {name:"Green Table",x:69,y:53,category:"mysterious"},
 
-    return created;
-  }
+ {name:"Vintage",x:44,y:82,category:"old"},
+ {name:"Curios",x:69,y:82,category:"mysterious"},
 
-  try {
-    return JSON.parse(saved);
-  } catch {
-    return freshWorld();
-  }
+ {name:"Front Counter",x:15,y:82,category:"domestic"}
+];
+
+/* =========================================================
+   OBJECT GENERATION
+========================================================= */
+
+const types = [
+ ["Coffee Mug","☕","domestic"],
+ ["Desk Lamp","💡","domestic"],
+ ["Alarm Clock","⏰","old"],
+ ["Motel Key","🔑","old"],
+ ["Framed Photograph","🖼️","sentimental"],
+ ["Bent Spoon","🥄","broken"],
+ ["Ceramic Bird","🐦","domestic"],
+ ["Rotary Telephone","☎️","old"],
+ ["Pocket Radio","📻","old"],
+ ["Postcard","💌","sentimental"],
+ ["Snow Globe","🔮","sentimental"],
+ ["Toy Car","🚗","colorful"],
+ ["Glass Bottle","🧪","mysterious"],
+ ["Kitchen Timer","⏲️","domestic"],
+ ["Paperback Book","📖","old"],
+ ["Plastic Chair","🪑","domestic"],
+ ["Cassette Tape","📼","old"],
+ ["Picture Frame","🖼️","mysterious"],
+ ["Bus Ticket","🎟️","sentimental"],
+ ["Thermos","🧃","old"],
+ ["Umbrella","☂️","colorful"],
+ ["Porcelain Dog","🐕","domestic"]
+];
+
+const colors = [
+ "Red","Blue","Yellow","Green","Orange",
+ "Cream","Gray","White","Black",
+ "Faded Pink","Mustard","Teal"
+];
+
+const normalDetails = [
+ "It shows signs of ordinary use.",
+ "There is a small scratch along one edge.",
+ "The label is partially faded.",
+ "Someone removed the original price sticker.",
+ "One corner has been carefully repaired.",
+ "The surface has several faint marks."
+];
+
+const oddDetails = [
+ "The manufacturer's name is missing.",
+ "A small number is written underneath.",
+ "One component is slightly different from the others.",
+ "It contains a compartment with no obvious purpose.",
+ "Someone removed every identifying mark.",
+ "Its serial number is unusually short."
+];
+
+const strangeDetails = [
+ "The instruction label describes a button that does not exist.",
+ "A date on the underside has not happened yet.",
+ "There is a tiny door built into the back.",
+ "The object depicts itself in miniature.",
+ "Its underside reads: SECOND ATTEMPT.",
+ "A handwritten note says: PLEASE RETURN BEFORE THURSDAY."
+];
+
+/* =========================================================
+   WORLD
+========================================================= */
+
+let world = loadWorld();
+
+function newWorld() {
+
+ const state = {
+   collections:{},
+   inventory:[],
+   activity:[],
+   positions:{},
+   nextId:1
+ };
+
+ bots.forEach(bot=>{
+   state.collections[bot.id]=[];
+
+   state.positions[bot.id]={
+     x:rand(15,85),
+     y:rand(30,75)
+   };
+ });
+
+ for(let i=0;i<22;i++){
+   state.inventory.push(generateObject(state));
+ }
+
+ state.activity.push({
+   text:"The shop opened.",
+   time:Date.now()
+ });
+
+ return state;
 }
 
 /* =========================================================
-   GENERAL HELPERS
+   GENERATION
 ========================================================= */
 
-function random(array) {
-  return array[
-    Math.floor(
-      Math.random() * array.length
-    )
-  ];
-}
+function generateObject(state=world){
 
-function shuffle(array) {
-  for (
-    let i = array.length - 1;
-    i > 0;
-    i--
-  ) {
-    const j =
-      Math.floor(
-        Math.random() * (i + 1)
-      );
+ const t=random(types);
 
-    [
-      array[i],
-      array[j]
-    ] = [
-      array[j],
-      array[i]
-    ];
-  }
+ const roll=Math.random();
 
-  return array;
-}
+ let peculiarity;
 
-function randInt(min, max) {
-  return (
-    Math.floor(
-      Math.random() *
-      (max - min + 1)
-    ) + min
-  );
-}
+ if(roll<.6){
+   peculiarity=rand(1,30);
+ }
+ else if(roll<.9){
+   peculiarity=rand(31,65);
+ }
+ else{
+   peculiarity=rand(66,100);
+ }
 
-function capitalize(str) {
-  return (
-    str.charAt(0).toUpperCase() +
-    str.slice(1)
-  );
-}
+ let detail;
 
-function formatTime(timestamp) {
-  return new Date(
-    timestamp
-  ).toLocaleString();
-}
+ if(peculiarity<31){
+   detail=random(normalDetails);
+ }
+ else if(peculiarity<66){
+   detail=random([...normalDetails,...oddDetails]);
+ }
+ else{
+   detail=random([...oddDetails,...strangeDetails]);
+ }
 
-function sleep(ms) {
-  return new Promise(
-    resolve =>
-      setTimeout(resolve, ms)
-  );
-}
+ return {
+   id:state.nextId++,
+   name:random(colors)+" "+t[0],
+   icon:t[1],
+   category:t[2],
 
-function toast(message) {
-  const el =
-    document.getElementById(
-      "toast"
-    );
+   /* hidden from viewers */
+   peculiarity,
 
-  el.textContent =
-    message;
-
-  el.classList.add("show");
-
-  setTimeout(
-    () =>
-      el.classList.remove("show"),
-    2600
-  );
+   description:detail
+ };
 }
 
 /* =========================================================
-   INITIAL RENDER
+   BOT DECISION
 ========================================================= */
 
-renderAll();
+function score(bot,obj){
+
+ let value=Math.random()*5;
+
+ value+=bot.preferences[obj.category]||0;
+
+ /*
+ peculiarity is hidden from the website,
+ but still affects how interesting the
+ object is to certain bots.
+ */
+
+ if(obj.peculiarity>60){
+   value+=bot.preferences.mysterious*.35;
+ }
+
+ if(obj.peculiarity>85){
+   value+=2;
+ }
+
+ if(bot.id==="dot"){
+   value-=5;
+ }
+
+ if(bot.id==="felix"){
+
+   const same=
+     world.collections[bot.id]
+     .filter(o=>o.category===obj.category)
+     .length;
+
+   value+=same*1.8;
+ }
+
+ if(bot.id==="milo"){
+
+   const popularity=
+     Object.values(world.collections)
+     .flat()
+     .filter(o=>o.category===obj.category)
+     .length;
+
+   value+=popularity*.3;
+ }
+
+ return value;
+}
+
+function reason(bot,obj){
+
+ const pool={
+
+ mara:[
+   "Something about this feels unresolved.",
+   "I don't think this is as ordinary as it looks.",
+   "I'd like to inspect it again later."
+ ],
+
+ otto:[
+   "Someone kept this for a reason.",
+   "It looks like something somebody might miss.",
+   "I couldn't leave it behind."
+ ],
+
+ june:[
+   "At least this one seems useful.",
+   "I can imagine a purpose for this.",
+   "This is less pointless than most of the others."
+ ],
+
+ felix:[
+   "This fits with the others.",
+   "I'm beginning to notice a pattern.",
+   "The collection feels more complete now."
+ ],
+
+ dot:[
+   "I kept coming back to this one.",
+   "Most things here are noise. This isn't.",
+   "I'll make room for it."
+ ],
+
+ arthur:[
+   "I feel like I've seen this before.",
+   "It reminds me of somewhere I've never been.",
+   "This belongs to a time I almost remember."
+ ],
+
+ nell:[
+   "Nobody else seemed interested.",
+   "I think being overlooked makes it better.",
+   "Everyone walked past this."
+ ],
+
+ milo:[
+   "I've noticed others choosing things like this.",
+   "I'm curious what everyone sees in these.",
+   "There seems to be something here."
+ ],
+
+ iris:[
+   "It would look right on the shelf.",
+   "I like the way it looks.",
+   "The color convinced me."
+ ],
+
+ gus:[
+   "I don't know. I just chose it.",
+   "Maybe this is the beginning of something.",
+   "This seemed interesting today."
+ ]
+
+ };
+
+ return random(pool[bot.id]);
+}
+
+/* =========================================================
+   BOT VISIT
+========================================================= */
+
+async function botVisit(bot){
+
+ const place=random(locations);
+
+ moveBot(bot,place.x,place.y);
+
+ addActivity(
+   `${bot.name} moved to ${place.name}.`
+ );
+
+ await sleep(rand(1800,3500));
+
+ const candidates=
+   world.inventory
+   .filter(o=>
+      o.category===place.category ||
+      Math.random()<.25
+   )
+   .sort(()=>Math.random()-.5)
+   .slice(0,4);
+
+ if(!candidates.length) return;
+
+ let best=null;
+ let bestScore=-999;
+
+ candidates.forEach(obj=>{
+   const s=score(bot,obj);
+
+   if(s>bestScore){
+     best=obj;
+     bestScore=s;
+   }
+ });
+
+ showThought(bot,"?");
+
+ addActivity(
+   `${bot.name} is inspecting ${best.name}.`
+ );
+
+ await sleep(rand(1300,2500));
+
+ hideThought(bot);
+
+ const threshold=
+   bot.id==="dot" ? 12 : 8;
+
+ if(bestScore>threshold && Math.random()>.35){
+
+   world.inventory=
+     world.inventory.filter(
+       o=>o.id!==best.id
+     );
+
+   const owned={
+     ...best,
+     reason:reason(bot,best),
+     acquired:Date.now()
+   };
+
+   world.collections[bot.id].push(owned);
+
+   showThought(bot,"♥");
+
+   addActivity(
+     `${bot.name} picked up ${best.name}.`
+   );
+
+   await sleep(1600);
+
+   hideThought(bot);
+
+   world.inventory.push(
+     generateObject()
+   );
+
+   render();
+ }
+
+ saveWorld();
+}
+
+/* =========================================================
+   LOOP
+========================================================= */
+
+function simulationLoop(){
+
+ const bot=random(bots);
+
+ botVisit(bot);
+
+ setTimeout(
+   simulationLoop,
+   rand(5000,9000)
+ );
+}
+
+setTimeout(
+ simulationLoop,
+ 2500
+);
+
+/* =========================================================
+   BOT RENDER
+========================================================= */
+
+function createBots(){
+
+ const shop=
+   document.getElementById("shop");
+
+ bots.forEach(bot=>{
+
+   const el=
+     document.createElement("div");
+
+   el.id="bot-"+bot.id;
+   el.className="bot";
+
+   el.style.setProperty(
+     "--bot-color",
+     bot.color
+   );
+
+   el.innerHTML=`
+     <div class="thought">?</div>
+
+     <div class="bot-body">
+       <div class="bot-screen">
+         <div class="bot-eyes">••</div>
+       </div>
+
+       <div class="bot-leg left"></div>
+       <div class="bot-leg right"></div>
+     </div>
+
+     <div class="bot-name">
+       ${bot.name}
+     </div>
+   `;
+
+   shop.appendChild(el);
+
+   const pos=
+     world.positions[bot.id];
+
+   moveBot(
+     bot,
+     pos.x,
+     pos.y,
+     false
+   );
+ });
+
+}
+
+function moveBot(bot,x,y,save=true){
+
+ const el=
+   document.getElementById(
+     "bot-"+bot.id
+   );
+
+ if(!el) return;
+
+ el.style.left=x+"%";
+ el.style.top=y+"%";
+
+ if(save){
+
+   world.positions[bot.id]={
+     x,y
+   };
+
+   saveWorld();
+ }
+}
+
+function showThought(bot,text){
+
+ const el=
+   document.getElementById(
+     "bot-"+bot.id
+   );
+
+ if(!el) return;
+
+ el.classList.add("thinking");
+
+ el.querySelector(".thought")
+   .textContent=text;
+}
+
+function hideThought(bot){
+
+ const el=
+   document.getElementById(
+     "bot-"+bot.id
+   );
+
+ if(el){
+   el.classList.remove("thinking");
+ }
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function renderBots(){
+
+ const list=
+   document.getElementById("botList");
+
+ list.innerHTML="";
+
+ bots.forEach(bot=>{
+
+   const count=
+     world.collections[bot.id].length;
+
+   const row=
+     document.createElement("div");
+
+   row.className="bot-row";
+
+   row.innerHTML=`
+      <div
+        class="mini-bot"
+        style="--bot-color:${bot.color}">
+      </div>
+
+      <div>
+        <div class="row-name">
+          ${bot.name}
+        </div>
+
+        <div class="row-tag">
+          ${bot.tag}
+        </div>
+      </div>
+
+      <div class="row-count">
+        Items: ${count}
+      </div>
+   `;
+
+   row.onclick=()=>{
+     openProfile(bot.id);
+   };
+
+   list.appendChild(row);
+ });
+}
+
+/* =========================================================
+   INVENTORY SIDEBAR
+========================================================= */
+
+function renderInventory(){
+
+ const box=
+   document.getElementById(
+     "inventoryList"
+   );
+
+ box.innerHTML=
+   world.inventory
+   .slice(0,20)
+   .map(obj=>`
+      <div class="shop-object">
+
+        <div class="shop-object-name">
+          ${obj.icon}
+          ${obj.name}
+        </div>
+
+        <div class="shop-object-desc">
+          ${obj.description}
+        </div>
+
+      </div>
+   `)
+   .join("");
+}
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+function addActivity(text){
+
+ world.activity.unshift({
+   text,
+   time:Date.now()
+ });
+
+ world.activity=
+   world.activity.slice(0,100);
+
+ renderActivity();
+
+ saveWorld();
+}
+
+function renderActivity(){
+
+ const make=a=>`
+   <div class="activity">
+     ${a.text}
+   </div>
+ `;
+
+ document.getElementById(
+   "miniActivity"
+ ).innerHTML=
+   world.activity
+   .slice(0,12)
+   .map(make)
+   .join("");
+
+ document.getElementById(
+   "fullActivity"
+ ).innerHTML=
+   world.activity
+   .map(make)
+   .join("");
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function openProfile(id){
+
+ const bot=
+   bots.find(b=>b.id===id);
+
+ const collection=
+   world.collections[id];
+
+ document.getElementById(
+   "modalTitle"
+ ).textContent=
+   `${bot.name} — ${bot.tag}`;
+
+ document.getElementById(
+   "modalBio"
+ ).textContent=
+   bot.bio;
+
+ const box=
+   document.getElementById(
+     "collection"
+   );
+
+ if(!collection.length){
+
+   box.innerHTML=`
+     <div class="collection-card">
+       Nothing collected yet.
+     </div>
+   `;
+
+ }
+ else{
+
+   box.innerHTML=
+     collection
+     .map(obj=>`
+
+       <div class="collection-card">
+
+         <div class="collection-icon">
+           ${obj.icon}
+         </div>
+
+         <div class="collection-name">
+           ${obj.name}
+         </div>
+
+         <div class="collection-desc">
+           ${obj.description}
+         </div>
+
+         <div class="collection-reason">
+           "${obj.reason}"
+         </div>
+
+       </div>
+
+     `)
+     .join("");
+ }
+
+ document.getElementById(
+   "profileModal"
+ ).classList.add("open");
+}
+
+function closeModal(){
+
+ document.getElementById(
+   "profileModal"
+ ).classList.remove("open");
+}
+
+/* =========================================================
+   TABS
+========================================================= */
+
+document
+.querySelectorAll(".tab")
+.forEach(tab=>{
+
+ tab.onclick=()=>{
+
+   document
+   .querySelectorAll(".tab")
+   .forEach(t=>
+     t.classList.remove("active")
+   );
+
+   document
+   .querySelectorAll(".side-panel")
+   .forEach(p=>
+     p.classList.remove("active")
+   );
+
+   tab.classList.add("active");
+
+   document
+   .getElementById(
+     tab.dataset.tab
+   )
+   .classList.add("active");
+ };
+
+});
+
+/* =========================================================
+   CLOCK
+========================================================= */
+
+function clock(){
+
+ document.getElementById(
+   "clock"
+ ).textContent=
+   new Date()
+   .toLocaleTimeString();
+}
+
+setInterval(clock,1000);
+clock();
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function saveWorld(){
+
+ localStorage.setItem(
+   STORAGE_KEY,
+   JSON.stringify(world)
+ );
+}
+
+function loadWorld(){
+
+ const saved=
+   localStorage.getItem(
+     STORAGE_KEY
+   );
+
+ if(!saved){
+   const state=newWorld();
+
+   localStorage.setItem(
+     STORAGE_KEY,
+     JSON.stringify(state)
+   );
+
+   return state;
+ }
+
+ try{
+   return JSON.parse(saved);
+ }
+ catch{
+   return newWorld();
+ }
+}
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function random(arr){
+ return arr[
+   Math.floor(
+     Math.random()*arr.length
+   )
+ ];
+}
+
+function rand(min,max){
+
+ return Math.floor(
+   Math.random()*
+   (max-min+1)
+ )+min;
+}
+
+function sleep(ms){
+ return new Promise(
+   resolve=>setTimeout(resolve,ms)
+ );
+}
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function render(){
+
+ renderBots();
+ renderInventory();
+ renderActivity();
+ saveWorld();
+}
+
+/* =========================================================
+   START
+========================================================= */
+
+createBots();
+render();
 
 </script>
 
